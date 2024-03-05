@@ -121,6 +121,7 @@ def post_arg_parse_setup(config: configuration.NamespaceConfig) -> None:
     assert memory_handler is not None and stderr_handler is not None, msg
 
     root_logger.addHandler(file_handler)
+
     root_logger.removeHandler(memory_handler)
     temp_handler = getattr(memory_handler, 'target', None)
     memory_handler.setTarget(file_handler)  # pylint: disable=no-member
@@ -146,6 +147,10 @@ def post_arg_parse_setup(config: configuration.NamespaceConfig) -> None:
         post_arg_parse_except_hook,
         debug=config.debug, quiet=config.quiet, log_path=file_path)
 
+
+
+def setup_syslog_handler(config: configuration.NamespaceConfig) -> logging.Handler:
+    pass
 
 def setup_log_file_handler(config: configuration.NamespaceConfig, logfile: str,
                            fmt: str) -> Tuple[logging.Handler, str]:

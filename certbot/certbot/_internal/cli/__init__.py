@@ -91,6 +91,10 @@ def prepare_and_parse_args(plugins: plugins_disco.PluginsRegistry, args: List[st
              "flag to 0 disables log rotation entirely, causing "
              "Certbot to always append to the same log file.")
     helpful.add(
+        None, "--syslog", type=nonnegative_int,
+        default=flag_default("max_log_backups"),
+        help="Use syslog for logging instead of log files")
+    helpful.add(
         None, "--preconfigured-renewal", dest="preconfigured_renewal",
         action="store_true", default=flag_default("preconfigured_renewal"),
         help=argparse.SUPPRESS
